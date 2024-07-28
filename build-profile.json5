@@ -1,0 +1,49 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\wxchencj\\.ohos\\config\\default_HappyHealthLive_gXClahMMD5NlYwimP6AXsaLTF1omnxsQWuR_VhE1bNI=.cer",
+          "storePassword": "0000001AD568F25F7949EF6F219C2318247A6D324BF1596AC846FD3175F0B7538D118F04289345EA0834",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001A7794D103119FC332CF324DBAE18E8ABF0EA276BE8B50E7928FFD88141396865A250D6500CAA5",
+          "profile": "C:\\Users\\wxchencj\\.ohos\\config\\default_HappyHealthLive_gXClahMMD5NlYwimP6AXsaLTF1omnxsQWuR_VhE1bNI=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\wxchencj\\.ohos\\config\\default_HappyHealthLive_gXClahMMD5NlYwimP6AXsaLTF1omnxsQWuR_VhE1bNI=.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS",
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}
