@@ -1,6 +1,7 @@
+import { router } from '@kit.ArkUI';
 @Entry
 @Component
-struct welcome {
+struct StartupPage {
   build() {
     Column() {
       Column() {
@@ -45,6 +46,7 @@ struct welcome {
             .width("100%")
             .backgroundColor("#01DC82")
             .onClick(()=> {
+              router.pushUrl({url: "pages/PowerRadius"})
               console.log('同意')
             })
         }
@@ -58,7 +60,7 @@ struct welcome {
             .fontColor("#333333")
             .backgroundColor("#F0F1F0")
             .onClick(()=> {
-              console.log('同意')
+              console.log('退出')
             })
         }
         .width("100%")

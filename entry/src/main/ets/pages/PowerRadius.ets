@@ -1,3 +1,4 @@
+import { router } from "@kit.ArkUI"
 @Entry
 @Component
 struct PowerRadius {
@@ -54,12 +55,13 @@ struct PowerRadius {
         // .padding({left: 20, right: 20, bottom: 28})
 
         Row() {
-          Button("同意")
+          Button("知道了")
             .fontSize(14)
             .width("100%")
             .backgroundColor("#01DC82")
             .onClick(()=> {
-              console.log('同意')
+              router.pushUrl({url: "pages/LoginPage"})
+              console.log('知道了')
             })
         }
         .width("100%")

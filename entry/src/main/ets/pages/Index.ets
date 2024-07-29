@@ -1,6 +1,7 @@
+import { router } from '@kit.ArkUI';
 @Entry
 @Component
-struct welcome {
+struct Index {
   build() {
     Column() {
       Row() {}
@@ -20,7 +21,11 @@ struct welcome {
       .height("92vp")
       .alignItems(VerticalAlign.Center)
     }
+    .onClick(() => {
+      router.pushUrl({ url: "pages/StartupPage"})
+    })
     .width("100%")
     .height("100%")
+
   }
 }
