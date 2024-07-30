@@ -2,6 +2,7 @@ import swiperPage1 from './swiperPage1'
 import swiperPage2 from './swiperPage2'
 import swiperPage3 from './swiperPage3'
 import swiperPage4 from './swiperPage4'
+import { router } from '@kit.ArkUI';
 @Entry
 @Component
 struct Index {
@@ -12,7 +13,7 @@ struct Index {
         Text(this.skip? "跳过": ".").width("100%").fontSize(15).fontColor(this.skip? "#B0B0B8" : "#ffffff").height(44)
           .textAlign(TextAlign.End).padding({right: 24})
           .onClick(() => {
-
+            router.pushUrl({url: "pages/MainHome"})
           })
         Swiper() {
           swiperPage1()
