@@ -3,6 +3,7 @@
     "pages/Index",
     "pages/PowerRadius",
     "pages/StartupPage",
-    "pages/LoginPage"
+    "pages/LoginPage",
+    "pages/swiperExample/Index"
   ]
 }

@@ -60,7 +60,7 @@ struct PowerRadius {
             .width("100%")
             .backgroundColor("#01DC82")
             .onClick(()=> {
-              router.pushUrl({url: "pages/LoginPage"})
+              router.pushUrl({url: "pages/swiperExample/Index"})
               console.log('知道了')
             })
         }
