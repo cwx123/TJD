@@ -4,6 +4,7 @@
     "pages/PowerRadius",
     "pages/StartupPage",
     "pages/LoginPage",
-    "pages/swiperExample/Index"
+    "pages/swiperExample/Index",
+    "pages/MainHome"
   ]
 }

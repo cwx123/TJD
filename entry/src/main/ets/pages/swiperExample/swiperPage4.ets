@@ -1,4 +1,4 @@
-
+import { router } from '@kit.ArkUI';
 @Component
 export default struct swiperPage3 {
   build() {
@@ -28,6 +28,10 @@ export default struct swiperPage3 {
         .borderRadius(24)
         .margin({top: 36})
         .backgroundColor("#01DC82")
+        .onClick(() => {
+          console.log("11111")
+          router.pushUrl({url: "pages/MainHome"})
+        })
     }
     .width("100%")
     .height("100%")

@@ -5,11 +5,15 @@ import swiperPage4 from './swiperPage4'
 @Entry
 @Component
 struct Index {
+  @State skip: boolean = true
   build() {
     Column() {
       Column() {
-        Text("跳过").width("100%").fontSize(15).fontColor("#B0B0B8").height(44)
+        Text(this.skip? "跳过": ".").width("100%").fontSize(15).fontColor(this.skip? "#B0B0B8" : "#ffffff").height(44)
           .textAlign(TextAlign.End).padding({right: 24})
+          .onClick(() => {
+
+          })
         Swiper() {
           swiperPage1()
           swiperPage2()
@@ -29,7 +33,14 @@ struct Index {
           .selectedColor("#01DC82")
           .bottom(60)
           ) // 是否启用导航点指示器
-
+        .onChange((index: number) => {
+          console.info(index.toString())
+          if(index === 3) {
+            this.skip = false
+          } else {
+            this.skip = true
+          }
+        })
       }
       .width("100%")
       .layoutWeight(1)
