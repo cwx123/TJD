@@ -16,8 +16,8 @@ export default struct Index {
           .borderColor("#212135")
           .textAlign(TextAlign.Center)
       }
-      .height(44)
-      .padding({left: 24, right: 24, bottom: 6, top: 16})
+      .height(64)
+      .padding({left: 24, right: 24, bottom: 6, top: 26})
       .width("100%")
       .justifyContent(FlexAlign.SpaceBetween)
 
