@@ -1,3 +1,5 @@
+import { router } from '@kit.ArkUI';
+
 @Component
 export default struct Index {
   @State message: string = '个人中心';
@@ -177,6 +179,9 @@ export default struct Index {
             .height(56)
             .justifyContent(FlexAlign.SpaceBetween)
             .padding({top: 15, left: 14, right: 15, bottom: 16})
+            .onClick(() => {
+              router.pushUrl({url: "pages/view/Mine/Setting"})
+            })
             Row(){
               Row() {
                 Image($r("app.media.mine6")).width(24).height(24)

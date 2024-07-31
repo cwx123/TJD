@@ -23,13 +23,13 @@ export default struct HeaderTitle {
             router.back()
           })
 
-      Text("我的反馈")
-        .fontSize(14)
-        .fontWeight(400)
-        .fontColor(Color.Black)
-        .height(20)
-        .textAlign(TextAlign.Center)
-        .position({top:14, right: 1})
+      // Text("我的反馈")
+      //   .fontSize(14)
+      //   .fontWeight(400)
+      //   .fontColor(Color.Black)
+      //   .height(20)
+      //   .textAlign(TextAlign.Center)
+      //   .position({top:14, right: 1})
       }
     }
     .width("100%")

@@ -5,6 +5,7 @@
     "pages/StartupPage",
     "pages/LoginPage",
     "pages/swiperExample/Index",
-    "pages/MainHome"
+    "pages/MainHome",
+    "pages/view/Mine/Setting"
   ]
 }

@@ -17,7 +17,7 @@ export default struct Index {
           .textAlign(TextAlign.Center)
       }
       .height(44)
-      .padding({left: 24, right: 24, bottom: 6, top: 7})
+      .padding({left: 24, right: 24, bottom: 6, top: 16})
       .width("100%")
       .justifyContent(FlexAlign.SpaceBetween)
 
