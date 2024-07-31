@@ -1,8 +1,10 @@
+import HeaderTitle from './components/LoginTitle'
 @Entry
 @Component
 struct LoginPage {
   build() {
     Column() {
+      HeaderTitle({title: '密码登录'})
       Column() {
         Image($r("app.media.title1")).width(76).height(76).margin({top: 46})
         Text("乐动健康生活").margin({top: 18, bottom: 95}).fontColor("#040415").fontSize(18)
