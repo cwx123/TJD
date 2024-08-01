@@ -11,7 +11,7 @@ export default struct HeaderTitle {
 
         Text(this.title)
           .fontSize(16)
-          .fontWeight(400)
+          .fontWeight(600)
           .fontColor(Color.Black)
           .width("100%")
           .height(48)

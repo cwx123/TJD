@@ -1,4 +1,3 @@
-import text from '@ohos.graphics.text';
 
 @Component
 export default struct Index {
