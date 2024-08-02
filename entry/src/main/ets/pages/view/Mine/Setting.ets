@@ -1,9 +1,10 @@
 import text from '@ohos.graphics.text';
 import HeaderTitle from "../../components/HeaderTitle"
+import { router } from '@kit.ArkUI';
 
 @Entry
 @Component
-export default struct Setting {
+struct Setting {
   @State message: string = '设置';
 
   build() {
@@ -27,6 +28,9 @@ export default struct Setting {
         .height(56)
         .justifyContent(FlexAlign.SpaceBetween)
         .padding({top: 15, left: 14, right: 15, bottom: 16})
+        .onClick(() => {
+          router.pushUrl({url: 'pages/view/Mine/AccountSafe'})
+        })
       }
       .backgroundColor("#ffffff")
       .borderRadius(12)

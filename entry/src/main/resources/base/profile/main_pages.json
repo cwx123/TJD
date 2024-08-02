@@ -6,6 +6,9 @@
     "pages/LoginPage",
     "pages/swiperExample/Index",
     "pages/MainHome",
-    "pages/view/Mine/Setting"
+    "pages/view/Mine/Setting",
+    "pages/view/Mine/AccountSafe",
+    "pages/view/Mine/DestroyAccount",
+    "pages/SetPwd"
   ]
 }
