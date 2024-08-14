@@ -1,4 +1,4 @@
-
+@Entry
 @Component
 export default struct Index {
   @State message: string = '首页页面';
@@ -6,7 +6,7 @@ export default struct Index {
   build() {
     Column() {
       Row() {
-        Text("乐动健康生活").fontSize(22).fontColor("#040415")
+        Text("乐动健康生活").fontSize(28).fontColor("#040415")
         Text("+").fontSize(16).fontColor("#212135")
           .height(20)
           .width(20)
@@ -15,8 +15,8 @@ export default struct Index {
           .borderColor("#212135")
           .textAlign(TextAlign.Center)
       }
-      .height(64)
-      .padding({left: 24, right: 24, bottom: 6, top: 26})
+      .height(44)
+      .padding({left: 25, right: 24, bottom: 12,top:12})
       .width("100%")
       .justifyContent(FlexAlign.SpaceBetween)
 
@@ -40,7 +40,7 @@ export default struct Index {
                     Column().width(4).height(8).borderRadius(2).backgroundColor("#38CC7D")
                     Text("站立活动").fontColor("#666666").fontSize(13).margin({left: 5})
                   }.width(180)
-                  Text("8").fontWeight(500).fontStyle(20).fontColor("#040415").width(180).height(28).margin({top: 4, bottom: 1})
+                  Text("8").fontWeight(500).fontSize(20).fontColor("#040415").width(180).height(28).margin({top: 4, bottom: 1})
                   Text("12次").fontStyle(13).fontColor("#666666").width(180)
                 }
                 Column() {
@@ -89,7 +89,7 @@ export default struct Index {
           }
           Row() {
             Column() {
-              Text('运动记录').fontColor("#333333").fontSize(15).fontWeight(500).width("100%").height(21)
+              Text('运动记录').fontColor("#333333").fontSize(15).fontWeight('Bold').width("100%").height(21)
               Text('08/08 户外跑步').fontColor("#666666").fontSize(12).fontWeight(500).width("100%").height(16.5).margin({top: 2})
               Image($r("app.media.home_cycle")).width(60).height(60).margin({top: 12, bottom: 12})
               Text() {
@@ -105,7 +105,7 @@ export default struct Index {
             .padding({left: 14, top: 12})
 
             Column() {
-              Text('睡眠').fontColor("#333333").fontSize(15).fontWeight(500).width("100%").height(21)
+              Text('睡眠').fontColor("#333333").fontSize(15).fontWeight('Bold').width("100%").height(21)
               Text('08/08').fontColor("#666666").fontSize(12).fontWeight(500).width("100%").height(16.5).margin({top: 2})
               Image($r("app.media.home_cycle")).width(60).height(60).margin({top: 12, bottom: 12})
               Text() {

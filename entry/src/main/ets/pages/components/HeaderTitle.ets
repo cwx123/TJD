@@ -17,6 +17,7 @@ export default struct HeaderTitle {
           .height(48)
           .textAlign(TextAlign.Center)
           .fontColor("#000000")
+
         Image($r("app.media.arrow_left")).width(28).height(28)
           .position({top:10, left: 1})
           .onClick(() => {

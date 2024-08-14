@@ -41,19 +41,6 @@ struct PowerRadius {
           .fontColor("#86868F")
           .width("100%")
           .margin({top: 3,bottom: 41})
-        // Row() {
-        //   Flex({wrap: FlexWrap.Wrap, justifyContent: FlexAlign.Start}) {
-        //     Text("本服务需联网，收集个人基本资料，账号信息，运动健康信息，应用信息，网络信息，位置信息，个性化信息，以及您能主动上传的数据，以提供运动健康相关服务，点击‘同意’即表示同意")
-        //       .fontColor("#86868F").fontSize(12)
-        //     Text("《乐动健康生活用户协议》").fontSize(13)
-        //     Text("。个人信息处理详情，请参阅关于").fontColor("#86868F").fontSize(13)
-        //     Text("《乐动健康生活隐私声明》").fontSize(13)
-        //     Text("。").fontColor("#86868F").fontSize(13)
-        //   }
-        // }
-        // .width("100%")
-        // .padding({left: 20, right: 20, bottom: 28})
-
         Row() {
           Button("知道了")
             .fontSize(14)

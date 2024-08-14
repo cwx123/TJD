@@ -1,4 +1,5 @@
 import HeaderTitle from './components/LoginTitle'
+//忘记密码
 @Entry
 @Component
 struct ForgetPwd {

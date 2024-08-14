@@ -1,5 +1,5 @@
 import { router } from '@kit.ArkUI';
-
+@Entry
 @Component
 export default struct Index {
   @State message: string = '个人中心';
@@ -259,11 +259,15 @@ export default struct Index {
           .padding({top: 8, bottom: 8})
 
         }
+        .onClick(()=>{
+          router.pushUrl({url:"pages/LoginPage"})
+        })
       }
       .scrollable(ScrollDirection.Vertical)
       .scrollBar(BarState.Off)
       .edgeEffect(EdgeEffect.Spring)
       .layoutWeight(1)
+
     }
     .linearGradient({
       direction: GradientDirection.Bottom, // 渐变方向

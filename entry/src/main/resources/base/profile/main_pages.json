@@ -7,8 +7,16 @@
     "pages/swiperExample/Index",
     "pages/MainHome",
     "pages/view/Mine/Setting",
+    "pages/view/Mine/Index",
     "pages/view/Mine/AccountSafe",
-    "pages/view/Mine/DestroyAccount",
-    "pages/SetPwd"
+    "pages/view/Mine/destroyAccount",
+    "pages/SetPwd",
+    "pages/login/PasswordLogin",
+    "pages/login/ForgetPassword",
+    "pages/login/AuthCode",
+    "pages/login/demo1",
+    "pages/login/PhoneLogin",
+    "pages/login/demo2",
+    "pages/login/PerfectInfo"
   ]
 }

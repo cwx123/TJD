@@ -1,3 +1,4 @@
+
 @Component
 export default struct Index {
   @State message: string = '设备页面';

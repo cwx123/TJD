@@ -23,13 +23,10 @@ export default struct swiperPage3 {
         .fontSize(15)
         .width(176)
         .height(40)
-        // .borderWidth(1)
-        // .borderColor("#B0B0B8")
         .borderRadius(24)
         .margin({top: 36})
         .backgroundColor("#01DC82")
         .onClick(() => {
-          console.log("11111")
           router.pushUrl({url: "pages/MainHome"})
         })
     }

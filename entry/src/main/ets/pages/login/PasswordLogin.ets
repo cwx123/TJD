@@ -1,73 +1,35 @@
-import LoginTitle from './components/LoginTitle'
-import router from '@ohos.router';
+import HeaderTitle from '../components/LoginTitle'
+import { router } from '@kit.ArkUI'
+import TextInputicon from '../components/textinputicon'
 
-@Entry
+@Entry//密码登录
 @Component
-struct LoginPage {
-  @State phone :string=''
-  @State customPopup: boolean = false
-
-  @Builder popupBuilder() {
-    Row() {
-      Text('请输入正确的手机号或者邮箱').fontSize(10)
-    }
-    .height(50)
-    .padding(5)
-  }
-
-  handleInput(value: string) {
-    const phoneRegex = /^1[3-9]\d{9}$/;
-    if (phoneRegex.test(value)) {
-      router.pushUrl({ url: 'pages/login/AuthCode' })
-    } else {
-      this.customPopup = true
-    }
-  }
+struct PasswordLogin {
+  @State pwd: string = ''
   build() {
     Column() {
-      LoginTitle({title: '密码登录'})
+      HeaderTitle({title: '免密登录'})
       Column() {
-        Image($r("app.media.title1")).width(76).height(76).margin({top: 46})
-        Text("乐动健康生活").margin({top: 18, bottom: 95}).fontColor("#040415").fontSize(18)
+        Image($r("app.media.title1")).width(76).height(76).margin({top: 24})
+        Text("乐动健康生活").margin({top: 18, bottom: 49}).fontColor("#040415").fontSize(18)
         TextInput({placeholder: '请输入手机号码'})
+          .height(48).margin({bottom:14})
+        TextInputicon({placeholder: '请输入密码'})
           .height(48)
-          .inputFilter('[0-9]',()=>{
-            return 0
-          })
-          .onChange((value: string) => {
-            this.phone = value
-
-          })
-        Button('下一步')
+        Text('忘记密码')
+          .padding({left:200,top:12})
+          .fontSize(14)
+          .fontWeight('Medium')
+          .onClick(()=>{
+          router.pushUrl({url:'pages/login/ForgetPassword'},router.RouterMode.Single)
+        })
+        Button('登录')
           .width("100%")
-          .margin({top: 36, bottom:16})
+          .margin({top: 37, bottom:140})
           .backgroundColor("#01DC82")
           .fontSize(16)
-          .onClick(()=>{
-            this.handleInput(this.phone);
-            let timer2 = setTimeout(()=>{
-              this.customPopup = false
-            },4000)
-          })
-          .bindPopup(this.customPopup, {
-            builder: this.popupBuilder,
-            targetSpace: 220,
-            enableArrow: false, // 气泡弹出时不显示箭头
-            onStateChange: (e) => {
-              if (!e.isVisible) {
-                this.customPopup = false
-              }
-            }
-          })
-
-        Text("未注册账号验证通过后自动登录").fontColor("#B0B0B8").padding({bottom: 148})
         Text("其他登录方式").fontColor("#B0B0B8")
-
         Row() {
-          Image($r("app.media.login_dianxin")).width(44).height(44)
-            .onClick(()=>{
-              router.pushUrl({url:'pages/login/PhoneLogin'})
-            })
           Image($r("app.media.login_wechat")).width(44).height(44)
           Image($r("app.media.login_qq")).width(44).height(44)
           Image($r("app.media.login_hw")).width(44).height(44)
@@ -76,7 +38,7 @@ struct LoginPage {
         .justifyContent(FlexAlign.SpaceEvenly)
         .margin({top: 24})
       }
-      .padding({left: 43.5, right: 43.5})
+      .padding({left: 43.5, right: 43.5,top:20})
       Row() {
         Checkbox({ name: 'checkbox2', group: 'checkboxGroup' })
           .selectedColor('#763DD2')

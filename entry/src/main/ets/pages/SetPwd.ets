@@ -1,5 +1,7 @@
 import HeaderTitle from "./components/HeaderTitle"
 import { promptAction, router } from '@kit.ArkUI'
+import TextInputicon from './components/textinputicon'
+//忘记密码后手机登录设置密码
 @Entry
 @Component
 struct SetPwd {
@@ -15,24 +17,16 @@ struct SetPwd {
           .lineHeight(18)
           .margin({top: 40, bottom: 32})
         Row() {
-          TextInput({placeholder: '请输入密码'})
+          TextInputicon({ placeholder: '请输入密码' })
             .height(48)
-            .type(InputType.Password)
             .borderRadius(24)
             .backgroundColor("#F2F2F2")
-            .onChange((value: string) => {
-              this.password = value
-            })
         }
         Row() {
-          TextInput({placeholder: '请再次确认密码'})
+          TextInputicon({placeholder: '请再次确认密码'})
             .height(48)
-            .type(InputType.Password)
             .borderRadius(24)
             .backgroundColor("#F2F2F2")
-            .onChange((value: string) => {
-              this.newPwd = value
-            })
         }
         .margin({top: 14, bottom: 60})
         Text("密码需满足以下要求：").fontSize(14).fontColor("#040415").width("100%")

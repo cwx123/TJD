@@ -1,5 +1,6 @@
 import HeaderTitle from "./components/HeaderTitle"
 import { promptAction, router } from '@kit.ArkUI'
+//更改密码
 @Entry
 @Component
 struct EditPwd {

@@ -1,4 +1,4 @@
-
+import router from '@ohos.router';
 @Component
 export default struct swiperPage1 {
   build() {
@@ -28,6 +28,9 @@ export default struct swiperPage1 {
         .borderRadius(24)
         .margin({top: 36})
         .backgroundColor("#ffffff")
+        .onClick(() => {
+          router.pushUrl({url: "pages/MainHome"})
+        })
     }
     .width("100%")
     .height("100%")

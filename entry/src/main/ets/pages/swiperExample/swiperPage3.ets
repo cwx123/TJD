@@ -1,3 +1,4 @@
+import { router } from '@kit.ArkUI';
 
 @Component
 export default struct swiperPage3 {
@@ -18,10 +19,6 @@ export default struct swiperPage3 {
       Text("表盘壁纸").fontColor("#6B7285").fontSize(18).margin({top: 64, bottom: 8})
       Text("海量精选表盘").fontColor("#6B7285").fontSize(14)
 
-      // Row() {
-      //
-      // }.width("100%")
-
       Button('开启健康生活', { controlSize: ControlSize.SMALL, buttonStyle: ButtonStyleMode.NORMAL })
         .fontColor("#B0B0B8")
         .fontSize(15)
@@ -32,6 +29,9 @@ export default struct swiperPage3 {
         .borderRadius(24)
         .margin({top: 36})
         .backgroundColor("#ffffff")
+        .onClick(() => {
+          router.pushUrl({url: "pages/MainHome"})
+        })
     }
     .width("100%")
     .height("100%")
