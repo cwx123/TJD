@@ -47,7 +47,7 @@ struct PasswordLogin {
             console.info('Checkbox1 change is'+ value)
           })
           .unselectedColor("#A092AB")
-
+          .width(13)
         Flex({wrap: FlexWrap.Wrap}) {
           Text() {
             Span("登录即表示同意").fontColor("#86868F").fontSize(13)
@@ -68,10 +68,10 @@ struct PasswordLogin {
           }
         }.margin({left: 6})
       }
-      .padding({left: 20, right: 26})
+      .padding({left: 20, right: 30})
       .margin({top: 20})
     }
-    .width("100%")
+    .width("96%")
     .height("100%")
   }
 }

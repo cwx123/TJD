@@ -1,11 +1,15 @@
 import LoginTitle from './components/LoginTitle'
 import router from '@ohos.router';
+import { PersistenceV2 } from '@kit.ArkUI'
+import { Person } from '../Dataapp/d1';
 
 @Entry
-@Component
+@ComponentV2
 struct LoginPage {
-  @State phone :string=''
-  @State customPopup: boolean = false
+  phone1 :string=''
+  customPopup: boolean = false
+  @Local person: Person = PersistenceV2.connect(Person, () => new Person)!
+
 
   @Builder popupBuilder() {
     Row() {
@@ -18,6 +22,7 @@ struct LoginPage {
   handleInput(value: string) {
     const phoneRegex = /^1[3-9]\d{9}$/;
     if (phoneRegex.test(value)) {
+      this.person.phone=value
       router.pushUrl({ url: 'pages/login/AuthCode' })
     } else {
       this.customPopup = true
@@ -35,7 +40,7 @@ struct LoginPage {
             return 0
           })
           .onChange((value: string) => {
-            this.phone = value
+            this.phone1 = value
 
           })
         Button('下一步')
@@ -44,7 +49,8 @@ struct LoginPage {
           .backgroundColor("#01DC82")
           .fontSize(16)
           .onClick(()=>{
-            this.handleInput(this.phone);
+            this.handleInput(this.phone1);
+
             let timer2 = setTimeout(()=>{
               this.customPopup = false
             },4000)
@@ -85,7 +91,7 @@ struct LoginPage {
             console.info('Checkbox1 change is'+ value)
           })
           .unselectedColor("#A092AB")
-
+          .width(13)
         Flex({wrap: FlexWrap.Wrap}) {
           Text() {
             Span("登录即表示同意").fontColor("#86868F").fontSize(13)
@@ -106,10 +112,10 @@ struct LoginPage {
           }
         }.margin({left: 6})
       }
-      .padding({left: 20, right: 26})
+      .padding({left: 20, right: 30})
       .margin({top: 20})
     }
-    .width("100%")
+    .width("96%")
     .height("100%")
   }
 }

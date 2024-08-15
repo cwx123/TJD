@@ -17,6 +17,7 @@
     "pages/login/demo1",
     "pages/login/PhoneLogin",
     "pages/login/demo2",
-    "pages/login/PerfectInfo"
+    "pages/login/PerfectInfo",
+    "pages/components/TextInputCodeView"
   ]
 }

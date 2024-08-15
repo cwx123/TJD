@@ -1,11 +1,15 @@
 import LoginTitle from '../components/LoginTitle'
 import router from '@ohos.router';
+import { Person } from '../../Dataapp/d1';
+import { PersistenceV2 } from '@kit.ArkUI';
+import Dialog from '../components/Dialog'
 
 @Entry
-@Component
+@ComponentV2
 struct PhoneLogin {
-  @State myphone:string = '19133339999'
-  @State myphoneys:string = this.myphone.replace(this.myphone.slice(3,7),'****')
+  @Local person: Person = PersistenceV2.connect(Person, () => new Person)!
+  myphoney:string = this.person.phone.replace(this.person.phone.slice(3,7),'****')
+
   build() {
     Column() {
       LoginTitle({title:'帮助'})
@@ -18,7 +22,7 @@ struct PhoneLogin {
           .margin({top: 18, bottom: 65.5})
           .fontColor("#040415")
           .fontSize(18)
-        Text(this.myphoneys)
+        Text(this.myphoney)
           .fontSize(28)
           .fontColor('#FF040415')
           .fontFamily('PingFang SC-Heavy')
@@ -33,15 +37,17 @@ struct PhoneLogin {
           .backgroundColor("#01DC82")
           .fontSize(16)
           .onClick(()=>{
-            router.pushUrl({url:'pages/view/Mine/Index'})
+            // router.pushUrl({url:'pages/view/Mine/Index'})
+
           })
+        // Dialog()
         Text("其他登录方式").fontColor("#B0B0B8").padding({top: 164})
 
         Row() {
           Image($r("app.media.icon_login_phone_nomal")).width(44).height(44)
           Image($r("app.media.login_wechat")).width(44).height(44)
           Image($r("app.media.login_qq")).width(44).height(44)
-          Image($r("app.media.login_hw")).width(44).height(44)
+          Dialog().width(44).height(44)
             .onClick(()=>{
               router.pushUrl({url:'pages/login/demo1'})
             })
@@ -78,13 +84,13 @@ struct PhoneLogin {
               .onClick(() => {
                 console.log("运营商服务条款")
               })
-          }.textAlign(TextAlign.Center)
+          }
         }.margin({left: 6})
       }
-      .padding({left: 20, right: 26})
+      .padding({left: 20, right: 30})
       .margin({top: 20})
     }
-    .width("100%")
+    .width("96%")
     .height("100%")
   }
 }

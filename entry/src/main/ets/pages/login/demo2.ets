@@ -1,10 +1,12 @@
 // 导入所需的模块
 import { loginComponentManager, LoginWithHuaweiIDButton } from '@kit.AccountKit';
 import { BusinessError } from '@kit.BasicServicesKit';
+import { Person } from '../../Dataapp/d1'
+import { PersistenceV2 } from '@kit.ArkUI'
 
 // 登录页面组件
 @Entry
-@Component
+@ComponentV2
 struct LoginPage {
   // 定义一个控制器属性
   private controller: loginComponentManager.LoginWithHuaweiIDButtonController =
@@ -24,11 +26,16 @@ struct LoginPage {
       console.error('Login failed: Unknown error');
     }
   };
-
+  @Local person: Person = PersistenceV2.connect(Person, () => new Person)!
   build() {
     // 使用Flex布局
     Column() {
       // 添加登录按钮
+      Button(`年龄:${this.person.age}`)
+        .onClick(() => {
+          this.person.age++
+        })
+      Text(this.person.phone)
       LoginWithHuaweiIDButton({
         params: {
           style: loginComponentManager.Style.BUTTON_RED,

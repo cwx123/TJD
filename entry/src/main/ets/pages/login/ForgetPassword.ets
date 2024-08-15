@@ -1,9 +1,12 @@
 import HeaderTitle from '../components/LoginTitle'
+import { PersistenceV2, router } from '@kit.ArkUI';
+import { Person } from '../../Dataapp/d1';
 
 @Entry
-@Component
+@ComponentV2
 struct ForgetPassword {
-  @State phone:string = '';
+  @Local person: Person = PersistenceV2.connect(Person, () => new Person)!
+
   build() {
     Column() {
       HeaderTitle()
@@ -18,7 +21,7 @@ struct ForgetPassword {
         TextInput({placeholder:'请输入手机号'})
           .height(48)
           .onChange((value: string) => {
-            this.phone = value
+            this.person.phone = value
           })
         Button('下一步')
           .width("100%")
@@ -26,6 +29,9 @@ struct ForgetPassword {
           .margin({top: 36, bottom:76})
           .backgroundColor("#01DC82")
           .fontSize(16)
+          .onClick(()=>{
+            router.pushUrl({url:'pages/login/AuthCode'},router.RouterMode.Single)
+          })
       }
       // .padding({left: 20, right: 26})
       .margin({top: 20})
