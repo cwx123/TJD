@@ -3,6 +3,7 @@ import { ComponentContent } from "@ohos.arkui.node";
 import { Person } from '../../Dataapp/d1';
 import { PersistenceV2 } from '@kit.ArkUI';
 
+
 class Params {
   text: string = ""
   phone:string = ''
@@ -42,6 +43,13 @@ function buildText(params: Params) {
         Column(){
           Image($r('app.media.ico_cancel'))
             .width(24).height(24)
+            .onClick(()=>{
+              // let uiContext = this.getUIContext();
+              // // 获取PromptAction实例
+              // let promptAction = uiContext.getPromptAction();
+              // // 关闭自定义弹框
+              // promptAction.close();
+            })
         }
       }
       .width('100%')
@@ -60,7 +68,6 @@ function buildText(params: Params) {
         .textAlign(TextAlign.Center)
         .fontWeight(FontWeight.Regular)
         .padding({ left:14,right:14,bottom:32.5})
-        .margin({top:-4})
       Button('一键登录')
         .width("100%")
         .backgroundColor('#FF01DC82')
@@ -98,7 +105,7 @@ function buildText(params: Params) {
       }
       .margin({top: 12.5})
       .width('100%')
-      .padding({right:30})
+      .padding({right:30,bottom:28})
     }
     .width("96%")
     .borderRadius(8)
@@ -107,8 +114,10 @@ function buildText(params: Params) {
   }
   .height("100%")
   .visibility(800)
+  .padding({top:416})
   // 定义进场出场转场动画效果
-  .transition(TransitionEffect.OPACITY.animation({duration: 800}).combine(TransitionEffect.translate({y: 100})))
+  .transition(TransitionEffect.OPACITY.animation({duration: 800})
+    .combine(TransitionEffect.translate({y: 100})))
 } //自定义组件的内容
 
 
@@ -138,6 +147,7 @@ export default struct Index {
             };
           })
       }
+
       .width('100%')
       .height('100%')
     }

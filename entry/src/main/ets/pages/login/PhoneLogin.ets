@@ -37,7 +37,7 @@ struct PhoneLogin {
           .backgroundColor("#01DC82")
           .fontSize(16)
           .onClick(()=>{
-            // router.pushUrl({url:'pages/view/Mine/Index'})
+            router.pushUrl({url:'pages/view/Mine/Index'})
 
           })
         // Dialog()
@@ -49,7 +49,7 @@ struct PhoneLogin {
           Image($r("app.media.login_qq")).width(44).height(44)
           Dialog().width(44).height(44)
             .onClick(()=>{
-              router.pushUrl({url:'pages/login/demo1'})
+              // router.pushUrl({url:'pages/login/demo1'})
             })
         }
         .width("100%")

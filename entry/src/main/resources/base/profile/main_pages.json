@@ -14,10 +14,9 @@
     "pages/login/PasswordLogin",
     "pages/login/ForgetPassword",
     "pages/login/AuthCode",
-    "pages/login/demo1",
     "pages/login/PhoneLogin",
-    "pages/login/demo2",
     "pages/login/PerfectInfo",
-    "pages/components/TextInputCodeView"
+    "pages/components/TextInputCodeView",
+    "pages/login/demo"
   ]
 }
