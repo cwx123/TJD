@@ -3,6 +3,7 @@ import router from '@ohos.router';
 import { Person } from '../../Dataapp/d1';
 import { PersistenceV2 } from '@kit.ArkUI';
 import Dialog from '../components/Dialog'
+import  HuaweiLogin  from './HuaweiLogin'
 
 @Entry
 @ComponentV2
@@ -47,9 +48,10 @@ struct PhoneLogin {
           Image($r("app.media.icon_login_phone_nomal")).width(44).height(44)
           Image($r("app.media.login_wechat")).width(44).height(44)
           Image($r("app.media.login_qq")).width(44).height(44)
-          Dialog().width(44).height(44)
+          // Dialog().width(44).height(44)
+          Image($r("app.media.login_hw")).width(44).height(44)
             .onClick(()=>{
-              // router.pushUrl({url:'pages/login/demo1'})
+              router.pushUrl({url:'pages/login/HuaweiLogin'})
             })
         }
         .width("100%")
@@ -57,6 +59,7 @@ struct PhoneLogin {
         .margin({top: 24})
       }
       .padding({left: 43.5, right: 43.5})
+      HuaweiLogin()
       Row() {
         Checkbox({ name: 'checkbox2', group: 'checkboxGroup' })
           .selectedColor('#763DD2')

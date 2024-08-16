@@ -29,6 +29,7 @@ struct SetPwd {
             .backgroundColor("#F2F2F2")
         }
         .margin({top: 14, bottom: 60})
+
         Text("密码需满足以下要求：").fontSize(14).fontColor("#040415").width("100%")
           .lineHeight(18).fontWeight(600)
         Text("1.至少6个字符；").fontSize(14).fontColor("#040415").width("100%").margin({top: 8}).lineHeight(18)
