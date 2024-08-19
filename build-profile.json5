@@ -22,9 +22,9 @@
         "type": "HarmonyOS",
         "material": {
           "certpath": "C:\\Users\\cbpengh\\.ohos\\config\\default_TJD_rDfkgBBqYKj7eeBFEm91SBUpI2R8B60nLb6HlKGzdeU=.cer",
-          "storePassword": "0000001BA60C88E6A68A7404479D4C6F56F4317026624357736907821E8AA2CBAB499E1CF46D64C47FAC7D",
+          "storePassword": "0000001B31DF8A7EB42BA3C4838300BB9392AF5376763E5F276051D9D017E09826BF58FBD768B5B61A4ADD",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001BF852289D385A4BECAFA59205F3D8AF2D4AD65CDC778BFE53D7BF3ED3CE6ADC33EA25BF12419B03",
+          "keyPassword": "0000001BC6F22BEE0B2BDD80269937578B5E7834CDD422BC0FC42BD5C6698712298BCDA1C34470D57FDDB3",
           "profile": "C:\\Users\\cbpengh\\.ohos\\config\\default_TJD_rDfkgBBqYKj7eeBFEm91SBUpI2R8B60nLb6HlKGzdeU=.p7b",
           "signAlg": "SHA256withECDSA",
           "storeFile": "C:\\Users\\cbpengh\\.ohos\\config\\default_TJD_rDfkgBBqYKj7eeBFEm91SBUpI2R8B60nLb6HlKGzdeU=.p12"

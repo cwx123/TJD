@@ -16,7 +16,7 @@
     "pages/login/AuthCode",
     "pages/login/PhoneLogin",
     "pages/login/PerfectInfo",
-    "pages/components/TextInputCodeView"
-
+    "pages/components/TextInputCodeView",
+    "pages/login/HelpLogin"
   ]
 }

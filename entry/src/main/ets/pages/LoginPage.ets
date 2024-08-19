@@ -1,15 +1,14 @@
 import LoginTitle from './components/LoginTitle'
 import router from '@ohos.router';
-import { PersistenceV2 } from '@kit.ArkUI'
-import { Person } from '../Dataapp/d1';
+
+PersistentStorage.persistProp('phone', '19133339999');
 
 @Entry
-@ComponentV2
+@Component
 struct LoginPage {
   phone1 :string=''
   customPopup: boolean = false
-  @Local person: Person = PersistenceV2.connect(Person, () => new Person)!
-
+  @StorageLink('phone') phone: string = '19133339999'
 
   @Builder popupBuilder() {
     Row() {
@@ -22,7 +21,7 @@ struct LoginPage {
   handleInput(value: string) {
     const phoneRegex = /^1[3-9]\d{9}$/;
     if (phoneRegex.test(value)) {
-      this.person.phone=value
+      this.phone=value
       router.pushUrl({ url: 'pages/login/AuthCode' })
     } else {
       this.customPopup = true
@@ -88,7 +87,7 @@ struct LoginPage {
           .selectedColor('#763DD2')
           .shape(CheckBoxShape.CIRCLE)
           .onChange((value: boolean) => {
-            console.info('Checkbox1 change is'+ value)
+            console.log('Checkbox1 change is'+ value)
           })
           .unselectedColor("#A092AB")
           .width(13)

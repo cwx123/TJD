@@ -1,14 +1,13 @@
 import HeaderTitle from '../components/LoginTitle'
-import { PersistenceV2, router } from '@kit.ArkUI';
 import { TextInputCodeView } from '../components/TextInputCodeView'
-import { Person } from '../../Dataapp/d1';
+import { router } from '@kit.ArkUI';
 
 @Entry
-@ComponentV2
+@Component
 struct AuthCode {
-  @Local person: Person = PersistenceV2.connect(Person, () => new Person)!
 
-  counttimer:number=60;
+  @State counttimer:number=60;
+  @StorageLink('phone') phone: string = ''
 
   aboutToAppear(): void {
     let timer1 = setInterval(()=>{
@@ -32,13 +31,13 @@ struct AuthCode {
           .fontWeight('Regular')
           .fontFamily('PingFang SC-Regular')
           .textAlign(TextAlign.Start)
-        Text(this.person.phone.substring(0,3))
+        Text(this.phone.substring(0,3))
           .fontWeight('bold')
           .padding({left:4})
-        Text(this.person.phone.substring(3,7))
+        Text(this.phone.substring(3,7))
           .fontWeight('bold')
           .padding({left:4})
-        Text(this.person.phone.substring(7,11))
+        Text(this.phone.substring(7,11))
           .fontWeight('bold')
           .padding({left:4})
       }.width('100%') .padding({ left:46, bottom: 74.5 })

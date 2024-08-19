@@ -1,15 +1,16 @@
 import LoginTitle from '../components/LoginTitle'
 import router from '@ohos.router';
-import { Person } from '../../Dataapp/d1';
-import { PersistenceV2 } from '@kit.ArkUI';
-import Dialog from '../components/Dialog'
 import  HuaweiLogin  from './HuaweiLogin'
+import LoginWithHuawei from '../../util/LoginWithHuawei'
+
+PersistentStorage.persistProp('myphone', '191****9999');
 
 @Entry
-@ComponentV2
+@Component
 struct PhoneLogin {
-  @Local person: Person = PersistenceV2.connect(Person, () => new Person)!
-  myphoney:string = this.person.phone.replace(this.person.phone.slice(3,7),'****')
+  @StorageLink('phone') phone: string = '19133339999'
+  @StorageLink('show') show: boolean = false
+  myphone:string = this.phone.replace(this.phone.slice(3,7),'****')
 
   build() {
     Column() {
@@ -23,7 +24,7 @@ struct PhoneLogin {
           .margin({top: 18, bottom: 65.5})
           .fontColor("#040415")
           .fontSize(18)
-        Text(this.myphoney)
+        Text(this.myphone)
           .fontSize(28)
           .fontColor('#FF040415')
           .fontFamily('PingFang SC-Heavy')
@@ -38,19 +39,16 @@ struct PhoneLogin {
           .backgroundColor("#01DC82")
           .fontSize(16)
           .onClick(()=>{
-            router.pushUrl({url:'pages/view/Mine/Index'})
-
+            router.pushUrl({url:'pages/login/PerfectInfo'})
           })
-        // Dialog()
         Text("其他登录方式").fontColor("#B0B0B8").padding({top: 164})
-
         Row() {
           Image($r("app.media.icon_login_phone_nomal")).width(44).height(44)
           Image($r("app.media.login_wechat")).width(44).height(44)
           Image($r("app.media.login_qq")).width(44).height(44)
-          // Dialog().width(44).height(44)
           Image($r("app.media.login_hw")).width(44).height(44)
             .onClick(()=>{
+              this.show = true
               router.pushUrl({url:'pages/login/HuaweiLogin'})
             })
         }
@@ -60,6 +58,8 @@ struct PhoneLogin {
       }
       .padding({left: 43.5, right: 43.5})
       HuaweiLogin()
+      LoginWithHuawei()
+
       Row() {
         Checkbox({ name: 'checkbox2', group: 'checkboxGroup' })
           .selectedColor('#763DD2')

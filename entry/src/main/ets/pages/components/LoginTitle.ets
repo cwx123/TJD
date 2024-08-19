@@ -2,8 +2,8 @@ import { router } from '@kit.ArkUI';
 
 @Component
 export default struct LoginTitle {
-  flag: boolean = true
-  title: string = ''
+  @State flag: boolean = true
+  @State title: string = ''
   @State loginurl:string=''
   aboutToAppear(): void {
     if (this.title=='密码登录') {
@@ -13,7 +13,7 @@ export default struct LoginTitle {
       this.loginurl='pages/LoginPage'
     }
     if (this.title=='帮助') {
-      this.loginurl='pages/LoginPage'
+      this.loginurl='pages/login/HelpLogin'
     }
 
   }

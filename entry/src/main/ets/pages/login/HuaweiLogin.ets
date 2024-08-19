@@ -1,12 +1,13 @@
 import { LoginPanel, loginComponentManager } from '@kit.AccountKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { BusinessError } from '@kit.BasicServicesKit';
-
+import { router } from '@kit.ArkUI';
 
 @Component
 export default  struct PreviewLoginPanelPage {
   // 是否展示LoginPanel组件
-  @State show: boolean = true;
+  @StorageLink('show') show: boolean = false;
+  @StorageLink('myphone') myphone: string |undefined= ''
 
   // 定义LoginPanel展示的隐私文本，展示用户服务协议、隐私协议和华为账号用户认证协议
   privacyText: loginComponentManager.PrivacyText[] = [{
@@ -16,7 +17,6 @@ export default  struct PreviewLoginPanelPage {
     text: '《用户服务协议》',
     tag: '用户服务协议',
     type: loginComponentManager.TextType.RICH_TEXT,
-
   }, {
     text: '《隐私协议》',
     tag: '隐私协议',
@@ -52,7 +52,6 @@ export default  struct PreviewLoginPanelPage {
       }
     })
     .onClickOptionalLoginButton(() => {
-      hilog.info(0x0000, 'testTag', 'onClickOptionalLoginButton');
       this.show = false;
     })
     .onClickOptionalLoginIcon((error: BusinessError, tag: string) => {
@@ -73,12 +72,14 @@ export default  struct PreviewLoginPanelPage {
       hilog.info(0x0000, 'testTag', 'onClickCloseButton');
       this.show = false;
     })
+    //隐私按钮
     .onChangeAgreementStatus((error: BusinessError, agreementStatus: loginComponentManager.AgreementStatus) => {
       if (error) {
         this.dealAllError(error);
         return;
       }
     })
+    //一键登录按钮
     .onClickEvent((error: BusinessError, clickEvent: loginComponentManager.ClickEvent) => {
       if (error) {
         this.dealAllError(error);
@@ -88,8 +89,8 @@ export default  struct PreviewLoginPanelPage {
 
   // 错误处理
   dealAllError(error: BusinessError): void {
-    hilog.error(0x0000, 'testTag', 'Failed to login, errorCode=%{public}d, errorMsg=%{public}s', error.code,
-      error.message);
+    console.log( 'testTag', 'Failed to login, errorCode=%{public}d, errorMsg=%{public}s', error.code,
+      error.message)
   }
 
   build() {
@@ -104,11 +105,10 @@ export default  struct PreviewLoginPanelPage {
             },
             privacyText: this.privacyText,
             // 参考华为账号开发指南获取匿名手机号
-            anonymousPhoneNumber: '139******99',
+            anonymousPhoneNumber: this.myphone,
             // verifyPhoneNumber：如果华为账号用户在过去90天内未进行短信验证，是否拉起Account Kit提供的短信验证码页面
             verifyPhoneNumber: true,
             loginType: loginComponentManager.LoginType.QUICK_LOGIN,
-
           },
           controller: this.controller
         })
