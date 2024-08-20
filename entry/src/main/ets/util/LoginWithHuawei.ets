@@ -30,33 +30,36 @@ export default  struct LoginWithHuawei {
   }
 
   getQuickLoginAnonymousPhone() {
-    // 创建授权请求，并设置参数
-    const authRequest = new authentication.HuaweiIDProvider().createAuthorizationWithHuaweiIDRequest();
-    // 获取匿名手机号需传quickLoginAnonymousPhone这个scope，传参之前需要先申请“华为账号一键登录”权限
-    //(权限名称为：quickLoginMobilePhone),后续才能获取匿名手机号数据
-    authRequest.scopes = ['quickLoginAnonymousPhone'];
-    // 用于防跨站点请求伪造
-    authRequest.state = util.generateRandomUUID();
-    // 一键登录场景该参数只能设置为false
-    authRequest.forceAuthorization = false;
-    const controller = new authentication.AuthenticationController();
-    console.log('成功1')
+    let loginRequest = new authentication.HuaweiIDProvider().createLoginWithHuaweiIDRequest();
+    loginRequest.forceLogin = true;
+    loginRequest.idTokenSignAlgorithm = authentication.IdTokenSignAlgorithm.PS256;
+    loginRequest.state = util.generateRandomUUID(); // 应用建议使用generateRandomUUID生成state
+    // loginRequest.state = 'xxx';  // 元服务自定义生成
+
+    // 执行登录请求，并处理结果
     try {
-      controller.executeRequest(authRequest).then((response: authentication.AuthorizationWithHuaweiIDResponse) => {
-        // 获取到UnionID、OpenID、匿名手机号
-        console.log('成功2')
-        const unionID = response.data?.unionID;
-        const openID = response.data?.openID;
-        const anonymousPhone = response.data?.extraInfo?.quickLoginAnonymousPhone as string;
-        // if (anonymousPhone) {
-        //   this.quickLoginAnonymousPhone = anonymousPhone;
-        //   return;
-        // }
-        console.log(unionID,openID,anonymousPhone)
-        // 未获取到匿名手机号需要跳转到应用自定义的登录页面
-      }).catch((error: BusinessError) => {
-        this.dealAllError(error);
-      })
+      let controller = new authentication.AuthenticationController(getContext(this));
+      controller.executeRequest(loginRequest, (error: BusinessError<Object>, data) => {
+        if (error) {
+          this.dealAllErrorl(error);
+          return;
+        }
+        let loginWithHuaweiIDResponse = data as authentication.LoginWithHuaweiIDResponse;
+        let state = loginWithHuaweiIDResponse.state;
+        if (state != undefined && loginRequest.state != state) {
+          console.log(''+state)
+          return;
+        }
+        console.log('Succeeded in login.'+JSON.stringify(loginWithHuaweiIDResponse))
+        let loginWithHuaweiIDCredential = loginWithHuaweiIDResponse.data!;
+        let code = loginWithHuaweiIDCredential.authorizationCode;
+        let idToken = loginWithHuaweiIDCredential.idToken;
+        let openID = loginWithHuaweiIDCredential.openID;
+        let unionID = loginWithHuaweiIDCredential.unionID;
+        console.log('loginWithHuaweiIDCredential',loginWithHuaweiIDCredential)
+        console.log(code,idToken,openID,unionID)
+        // 开发者处理code, idToken, openID, unionID
+      });
     } catch (error) {
       this.dealAllError(error);
     }
@@ -65,6 +68,9 @@ export default  struct LoginWithHuawei {
   // 错误处理
   dealAllError(error: BusinessError): void {
     console.log( '错误处理', error.code, error.message)
+  }
+  dealAllErrorl(error: BusinessError<Object>): void {
+    console.log('testTag', `Failed to login. Code: ${error.code}, message: ${error.message}`);
   }
   build() {
     Column(){

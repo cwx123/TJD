@@ -18,5 +18,22 @@
     },{
       "name": "EntryAbility1_label",
       "value": "label"
-    }]
+    },
+    {
+      "name": "grant_use_bluetooth",
+      "value": "允许应用查看蓝牙的配置"
+    },
+    {
+      "name": "grant_discovery_bluetooth",
+      "value": "允许应用配置本地蓝牙，查找远端设备且与之配对连接"
+    },
+    {
+      "name": "grant_location",
+      "value": "允许应用获取设备位置信息"
+    },
+    {
+      "name": "grant_manage_bluetooth",
+      "value": "允许应用获取设备位置信息"
+    }
+  ]
 }

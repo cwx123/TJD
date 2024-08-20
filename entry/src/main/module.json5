@@ -34,6 +34,12 @@
         ]
       }
     ],
+    "metadata": [
+      {
+        "name": "1476236442815442368",
+        "value": "D8793D3FCA70711A870AC4DE83016F6707FBFDB180BD9D50FBC7E7167D27DE9F"
+      }
+    ],
     "extensionAbilities": [
       {
         "name": "EntryBackupAbility",
@@ -54,7 +60,52 @@
       },
       {
         "name" : "ohos.permission.INTERNET",
+      },
+      {
+        //允许应用查看蓝牙的配置
+        "name": "ohos.permission.USE_BLUETOOTH",
+        "reason": "$string:grant_use_bluetooth",
+        "usedScene": {
+          "abilities": [
+            "MainAbility"
+          ],
+          "when": "inuse"
+        }
+      },
+      {
+        //允许应用配置本地蓝牙，查找远端设备且与之配对连接
+        "name": "ohos.permission.DISCOVER_BLUETOOTH",
+        "reason": "$string:grant_discovery_bluetooth",
+        "usedScene": {
+          "abilities": [
+            "MainAbility"
+          ],
+          "when": "inuse"
+        }
+      },
+      {
+        //允许应用获取设备位置信息
+        "name": "ohos.permission.LOCATION",
+        "reason": "$string:grant_location",
+        "usedScene": {
+          "abilities": [
+            "MainAbility"
+          ],
+          "when": "inuse"
+        }
+      },
+      {
+        //允许应用获取设备模糊位置信息
+        "name": "ohos.permission.APPROXIMATELY_LOCATION",
+        "reason": "$string:grant_location",
+        "usedScene": {
+          "abilities": [
+            "MainAbility"
+          ],
+          "when": "inuse"
+        }
       }
+
     ]
   }
 }

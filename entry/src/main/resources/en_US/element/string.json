@@ -18,5 +18,22 @@
     },{
       "name": "EntryAbility1_label",
       "value": "label"
-    }]
+    },
+    {
+      "name": "grant_use_bluetooth",
+      "value": "use_bluetooth"
+    },
+    {
+      "name": "grant_discovery_bluetooth",
+      "value": "discovery_bluetooth"
+    },
+    {
+      "name": "grant_location",
+      "value": "localtion_bluetooth"
+    },
+    {
+      "name": "grant_manage_bluetooth",
+      "value": "manage_bluetooth"
+    }
+  ]
 }
