@@ -1,11 +1,12 @@
 import HeaderTitle from '../components/LoginTitle'
-import { PersistenceV2, router } from '@kit.ArkUI';
-import { Person } from '../../Dataapp/d1';
+import {  router } from '@kit.ArkUI';
+
 
 @Entry
-@ComponentV2
+@Component
 struct ForgetPassword {
-  @Local person: Person = PersistenceV2.connect(Person, () => new Person)!
+  @StorageLink('phone') phone: string = '19133339999'
+
 
   build() {
     Column() {
@@ -21,7 +22,7 @@ struct ForgetPassword {
         TextInput({placeholder:'请输入手机号'})
           .height(48)
           .onChange((value: string) => {
-            this.person.phone = value
+            this.phone = value
           })
         Button('下一步')
           .width("100%")
