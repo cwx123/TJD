@@ -7,9 +7,10 @@ import { http } from '@kit.NetworkKit';
 // &loginType=${loginDto.loginType}
 // &verificatCode=${loginDto.verificatCode}`,
 
+
 // 登录接口调用
 export function login(loginDto: LoginDTO) {
-  return request<string>({ 
+  return request<string>({
     url: '/api/app/cuser/authcenter/user/login/password',
     extraData: loginDto,
     method: http.RequestMethod.POST,
