@@ -9,7 +9,7 @@ import { http } from '@kit.NetworkKit';
 
 // 登录接口调用
 export function login(loginDto: LoginDTO) {
-  return request<string>({
+  return request<string>({ 
     url: '/api/app/cuser/authcenter/user/login/password',
     extraData: loginDto,
     method: http.RequestMethod.POST,
