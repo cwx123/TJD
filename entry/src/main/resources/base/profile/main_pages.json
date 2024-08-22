@@ -8,6 +8,7 @@
     "pages/MainHome",
     "pages/view/Mine/Setting",
     "pages/view/Mine/Index",
+    "pages/view/Mine/PersonalData",
     "pages/view/Mine/AccountSafe",
     "pages/view/Mine/destroyAccount",
     "pages/SetPwd",

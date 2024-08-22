@@ -152,6 +152,9 @@ export default struct Index {
             .justifyContent(FlexAlign.SpaceBetween)
             .height(56)
             .padding({top: 15, left: 14, right: 15, bottom: 16})
+            .onClick(() => {
+              router.pushUrl({url: "pages/view/Mine/PersonalData"})
+            })
           }
           .height(248)
           .width("100%")
