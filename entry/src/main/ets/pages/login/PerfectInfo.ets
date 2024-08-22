@@ -1,4 +1,5 @@
 import LoginTitle from '../components/LoginTitle';
+import { router } from '@kit.ArkUI';
 
 @Entry
 @Component
@@ -81,6 +82,9 @@ struct Perfectinfo {
           .fontSize(16)
           .fontWeight('Bold')
           .padding({bottom:4})
+          .onClick(()=>{
+            router.pushUrl({url:'pages/view/Mine/Index'},router.RouterMode.Single)
+          })
       }
     }
   }

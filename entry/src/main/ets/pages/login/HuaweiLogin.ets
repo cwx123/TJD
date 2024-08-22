@@ -85,6 +85,7 @@ export default  struct PreviewLoginPanelPage {
         this.dealAllError(error);
         return;
       }
+      router.replaceUrl({url:'pages/view/Mine/Index'},router.RouterMode.Single)
     });
 
   // 错误处理

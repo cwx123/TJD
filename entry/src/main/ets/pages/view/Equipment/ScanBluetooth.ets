@@ -16,7 +16,6 @@ struct ScanBluetooth {
   @State deviceId:string = ''//设备id
   @State deviceName:string = ''//设备名称
   @State deviceindex:number =0//点击需要连接的设备索引
-
   @State deviceIdArr : Array<string> = [];
 
   //获取用户授权蓝牙
@@ -38,27 +37,23 @@ struct ScanBluetooth {
   openbluetooth(){
     this.isScan = !this.isScan
     let onReceiveEvent = (data: Array<ble.ScanResult>) => {
-      console.log('BLE scan device find result = ' + JSON.stringify(data));
+      //返回的单条数据是数组包裹一条对象数据
       let oneDevice : ble.ScanResult = JSON.parse(JSON.stringify(data))[0];
-      console.log('BLE scan device find oneDevice = ' + JSON.stringify(oneDevice));
-
+      //过滤返回的数据，将不为空并且不重复的设备加入数组
       if (oneDevice && !this.deviceIdArr.includes(oneDevice.deviceId)) {
         if (oneDevice.connectable && oneDevice.deviceName) {
-          console.log('BLE scan device add oneDevice = ' + JSON.stringify(oneDevice));
           this.bluetoothlist.push(oneDevice);
           this.deviceIdArr.push(oneDevice.deviceId);
-          console.log('BLE scan device add deviceIdArr = ' + JSON.stringify(this.deviceIdArr));
         }
       }
-
       console.log('BLE scan device find Arrlist = ' + JSON.stringify(this.bluetoothlist));
-
     }
     try {
       //开启扫描
       ble.on("BLEDeviceFind", onReceiveEvent);
-      //15s后关闭扫描
+      //16s后关闭扫描
       setTimeout(()=>{
+        this.scanboolean = false
         ble.off("BLEDeviceFind", onReceiveEvent);
       },15000)
       //过滤扫描的设备
@@ -88,13 +83,7 @@ struct ScanBluetooth {
     animateTo({
       duration: 5000,
       curve: Curve.Linear,
-      delay: 500,
-      iterations: -1, // 设置-1表示动画无限循环
-      expectedFrameRateRange: {
-        min: 10,
-        max: 120,
-        expected: 60,
-      }
+      iterations: 3, // 设置-1表示动画无限循环
     }, () => {
       this.rotateAngle = 360
     })
@@ -107,11 +96,17 @@ struct ScanBluetooth {
     this.openbluetooth()
 
   }
+  onPageShow(){
+    this.radarmap()
+  }
 
   build() {
     Column(){
+      //顶部
       Row() {
-        Image($r("app.media.arrow_left")).width(28).height(28)
+        Image($r("app.media.arrow_left"))
+          .width(28)
+          .height(28)
           .onClick(() => {
             router.back()
           })
@@ -120,8 +115,9 @@ struct ScanBluetooth {
           .fontWeight(400)
           .fontColor(Color.Black)
           .height(48)
-
-        Image($r("app.media.saoyisao")).width(19).height(19)
+        Image($r("app.media.saoyisao"))
+          .width(19)
+          .height(19)
 
       }
       .width("100%")
@@ -132,12 +128,12 @@ struct ScanBluetooth {
       Row(){
         Stack(){
           Image($r('app.media.img_scan_gif_1'))
-            .width(240).height(240)
+            .width(180).height(180)
           Image($r('app.media.img_scan_rotation'))
-            .width(240).height(240)
+            .width(180).height(180)
             .rotate({ x: 0, y: 0, z: 1, angle: this.rotateAngle })
             .onClick(() => {
-              this.radarmap()
+              // this.radarmap()
             })
         }
       }
@@ -149,7 +145,7 @@ struct ScanBluetooth {
             .fontWeight('Bold')
             .fontSize(18)
             .padding({bottom:8})
-          Text(this.scanboolean?'正在搜索可用设备':'未发现可用设备')
+          Text(this.scanboolean?'正在搜索可用设备':'搜索可用设备')
             .fontColor('#FF86868F')
             .fontSize(13)
           Button(this.scanboolean?'停止搜索':'重新扫描')
@@ -160,7 +156,11 @@ struct ScanBluetooth {
             .height(44)
             .width(148)
             .margin({top:24})
-            .visibility(this.bluetoothlist.length?Visibility.None:Visibility.Visible)
+            .onClick(()=>{
+              this.bluetoothlist = []
+              this.openbluetooth()
+              this.radarmap()
+            })
         }
       }
       // 扫描出来的设备

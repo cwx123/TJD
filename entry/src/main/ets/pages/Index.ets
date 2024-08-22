@@ -15,6 +15,10 @@ struct Index {
         Column() {
           Text('乐动健康生活').fontColor("#333333").fontSize(15)
           Text("快乐运动 健康生活").fontSize(11).fontColor("#86868F").margin({top: 3})
+          Button('跳转调试页')
+            .onClick(()=>{
+              router.pushUrl({ url:'pages/view/Equipment/ScanBluetooth'},router.RouterMode.Single)
+            })
         }
         .margin({left: 16})
       }
@@ -22,7 +26,8 @@ struct Index {
       .alignItems(VerticalAlign.Center)
     }
     .onClick(() => {
-      router.pushUrl({ url: "pages/StartupPage"})
+      router.replaceUrl({ url: "pages/StartupPage"})
+
     })
     .width("100%")
     .height("100%")

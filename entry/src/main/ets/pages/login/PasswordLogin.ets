@@ -6,6 +6,8 @@ import TextInputicon from '../components/textinputicon'
 @Component
 struct PasswordLogin {
   @State pwd: string = ''
+  @StorageLink('show') show: boolean = false
+
   build() {
     Column() {
       HeaderTitle({title: '免密登录'})
@@ -33,6 +35,10 @@ struct PasswordLogin {
           Image($r("app.media.login_wechat")).width(44).height(44)
           Image($r("app.media.login_qq")).width(44).height(44)
           Image($r("app.media.login_hw")).width(44).height(44)
+            .onClick(()=>{
+              this.show = true
+              router.pushUrl({url:'pages/login/HuaweiLogin'})
+            })
         }
         .width("100%")
         .justifyContent(FlexAlign.SpaceEvenly)
