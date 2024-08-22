@@ -1,7 +1,6 @@
 import { router } from '@kit.ArkUI'
 import { abilityAccessCtrl, PermissionRequestResult } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
-import connection from '@ohos.bluetooth.connection';
 import { access, ble } from '@kit.ConnectivityKit';
 //扫描蓝牙页面
 @Entry
@@ -18,6 +17,7 @@ struct ScanBluetooth {
   @State deviceName:string = ''//设备名称
   @State deviceindex:number =0//点击需要连接的设备索引
 
+  @State deviceIdArr : Array<string> = [];
 
   //获取用户授权蓝牙
   requestPermissionsFromUser() {
@@ -38,9 +38,21 @@ struct ScanBluetooth {
   openbluetooth(){
     this.isScan = !this.isScan
     let onReceiveEvent = (data: Array<ble.ScanResult>) => {
-      let dataString : ble.ScanResult = JSON.parse(JSON.stringify(data))[0];
-      this.bluetoothlist.push(dataString)
-      console.log('this.Arrlist'+JSON.stringify(this.bluetoothlist))
+      console.log('BLE scan device find result = ' + JSON.stringify(data));
+      let oneDevice : ble.ScanResult = JSON.parse(JSON.stringify(data))[0];
+      console.log('BLE scan device find oneDevice = ' + JSON.stringify(oneDevice));
+
+      if (oneDevice && !this.deviceIdArr.includes(oneDevice.deviceId)) {
+        if (oneDevice.connectable && oneDevice.deviceName) {
+          console.log('BLE scan device add oneDevice = ' + JSON.stringify(oneDevice));
+          this.bluetoothlist.push(oneDevice);
+          this.deviceIdArr.push(oneDevice.deviceId);
+          console.log('BLE scan device add deviceIdArr = ' + JSON.stringify(this.deviceIdArr));
+        }
+      }
+
+      console.log('BLE scan device find Arrlist = ' + JSON.stringify(this.bluetoothlist));
+
     }
     try {
       //开启扫描
