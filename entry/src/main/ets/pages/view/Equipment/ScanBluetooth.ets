@@ -7,78 +7,72 @@ import { access, ble } from '@kit.ConnectivityKit';
 @Entry
 @Component
 struct ScanBluetooth {
-@State title:string='添加设备'
-  @State onReceiveEventData: string = ''
-  @State isScan: boolean = false
-  @State Arrlist:Array<ble.ScanResult> = []
+  @State title:string='添加设备'//头部标题
+  @State onReceiveEventData: string = ''//
+  @State isScan: boolean = false//蓝牙打开状态
+  @State bluetoothlist:Array<ble.ScanResult> = []//扫描到的蓝牙列表
   @State dataString:string = ''
   @State rotateAngle: number = 0//旋转角度
-  @State scanboolean:boolean = true
+  @State scanboolean:boolean = true//是否扫描
+  @State deviceId:string = ''//设备id
+  @State deviceName:string = ''//设备名称
+  @State deviceindex:number =0//点击需要连接的设备索引
 
 
+  //获取用户授权蓝牙
   requestPermissionsFromUser() {
     let atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
     try {
       let context = getContext(this);
       atManager.requestPermissionsFromUser(context, ['ohos.permission.ACCESS_BLUETOOTH'],
         (err: BusinessError, data: PermissionRequestResult) => {
-          console.log('data:' + JSON.stringify(data));
-          console.log('data permissions:' + data.permissions);
-          console.log('data authResults:' + data.authResults);
+          // console.log('data:' + JSON.stringify(data));
+          // console.log('data permissions:' + data.permissions);
+          // console.log('data authResults:' + data.authResults);
         });
     } catch (err) {
       console.log(`catch err->${JSON.stringify(err)}`);
     }
   }
+  //打开蓝牙扫描
   openbluetooth(){
     this.isScan = !this.isScan
-
     let onReceiveEvent = (data: Array<ble.ScanResult>) => {
-      console.log('BLE scan device find result = ' + JSON.stringify(data));
-      this.Arrlist = JSON.parse(JSON.stringify(data));
-      // if (!this.Arrlist.includes(dataString)) {
-      //   this.Arrlist.push(dataString);
-      // }
-      console.log(this.Arrlist+'')
-      // this.onReceiveEventData = dataString
+      let dataString : ble.ScanResult = JSON.parse(JSON.stringify(data))[0];
+      this.bluetoothlist.push(dataString)
+      console.log('this.Arrlist'+JSON.stringify(this.bluetoothlist))
     }
     try {
+      //开启扫描
       ble.on("BLEDeviceFind", onReceiveEvent);
+      //15s后关闭扫描
+      setTimeout(()=>{
+        ble.off("BLEDeviceFind", onReceiveEvent);
+      },15000)
+      //过滤扫描的设备
       let scanFilter: ble.ScanFilter = {
-        // deviceId:"xxxx",
-        // name:"test",
+        deviceId:"XX:XX:XX:XX:XX:XX",
+        name:"test",
         // serviceUuid:"xxxx"
       };
-      console.log('scanFilter' + JSON.stringify(scanFilter))
+      // console.log('scanFilter' + JSON.stringify(scanFilter))
       let scanOptions: ble.ScanOptions = {
         interval: 50,
         dutyMode: ble.ScanDuty.SCAN_MODE_LOW_POWER,
         matchMode: ble.MatchMode.MATCH_MODE_AGGRESSIVE,
       }
+      //开始搜寻附近的低功耗蓝牙外围设备。搜索并连接到设备后调用bluetooth.stopBLEScan方法停止搜索
       ble.startBLEScan(null, scanOptions);
-
     } catch (err) {
       console.log('errCode: ' + (err as BusinessError).code + ', errMessage: ' + (err as BusinessError).message);
     }
   }
-  // scanbluetooth(){
-  //   try {
-  //     let result: Array<string> = connection.getPairedDevices();
-  //     result.forEach(s => {
-  //       let remoteDeviceName: string = connection.getRemoteDeviceName("41:40:6E:E1:53:69");//"32:6C:C7:8E:0C:C9"
-  //       console.log('remoteDeviceName',remoteDeviceName)
-  //       let localName: string = connection.getLocalName();
-  //       console.log('localName',localName)
-  //
-  //     })
-  //     this.scanboolean=false
-  //     console.log(this.scanboolean+'2222222222222')
-  //   } catch (err) {
-  //     console.log('errCode: ' + (err as BusinessError).code + ', errMessage: ' + (err as BusinessError).message);
-  //   }
-  // }
-  //扫描旋转动画
-  starblue():void{
+  //连接蓝牙配对
+  connectbluetooth(){
+
+  }
+  //雷达图动画
+  radarmap(){
     animateTo({
       duration: 5000,
       curve: Curve.Linear,
@@ -99,8 +93,7 @@ struct ScanBluetooth {
     this.requestPermissionsFromUser()
     //打开蓝牙扫描
     this.openbluetooth()
-    //蓝牙匹配名称
-    // this.scanbluetooth()
+
   }
 
   build() {
@@ -115,9 +108,7 @@ struct ScanBluetooth {
           .fontWeight(400)
           .fontColor(Color.Black)
           .height(48)
-          .onClick(()=>{
-            // router.pushUrl({url:this.loginurl}, router.RouterMode.Single)
-          })
+
         Image($r("app.media.saoyisao")).width(19).height(19)
 
       }
@@ -134,7 +125,7 @@ struct ScanBluetooth {
             .width(240).height(240)
             .rotate({ x: 0, y: 0, z: 1, angle: this.rotateAngle })
             .onClick(() => {
-              this.starblue()
+              this.radarmap()
             })
         }
       }
@@ -157,30 +148,33 @@ struct ScanBluetooth {
             .height(44)
             .width(148)
             .margin({top:24})
-            .visibility(this.Arrlist.length?Visibility.None:Visibility.Visible)
+            .visibility(this.bluetoothlist.length?Visibility.None:Visibility.Visible)
         }
       }
       // 扫描出来的设备
       Row(){
         Scroll() {
           List() {
-            ForEach(this.Arrlist, (item: string) => {
+            ForEach(this.bluetoothlist, (item:ble.ScanResult,index) => {
               ListItem() {
                 Row(){
                   Image($r('app.media.img_scan_device_square'))
                     .width(24).height(37)
                   Column(){
-                    Text('设备名称')
-                    Text(item)
+                    Text(item.deviceName)
+                    Text(item.deviceId)
                   }
                   .alignItems(HorizontalAlign.Start)
                   Button('连接')
                     .backgroundColor('#FFF0F1F0')
                     .fontColor('#FF07C05D')
                     .fontSize(13)
-                    .onClick(()=>{
-                    console.log('链接蓝牙')
-                  })
+                    .onClick(() => { // 点击对应设备，高亮并获取设备ID与设备名，用于后续连接
+                      this.deviceId = item.deviceId;
+                      this.deviceName = item.deviceName;
+                      this.deviceindex = index;
+
+                    })
 
                 }
                 .width('100%')
