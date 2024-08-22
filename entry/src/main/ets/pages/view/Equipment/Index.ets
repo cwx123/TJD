@@ -39,7 +39,7 @@ export default struct Index {
       cancel: ()=> { this.onCancel() },
       confirm: ()=> { this.onAccept() },
     }),
-    width:100,
+    width:100 ,
     height:60,
     offset: { dx: 150, dy: -310 },
 

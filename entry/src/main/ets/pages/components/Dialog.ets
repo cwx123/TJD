@@ -1,6 +1,5 @@
 import { BusinessError } from '@ohos.base';
 import { ComponentContent } from "@ohos.arkui.node";
-import { Person } from '../../Dataapp/d1';
 import { PersistenceV2 } from '@kit.ArkUI';
 
 
@@ -122,11 +121,11 @@ function buildText(params: Params) {
 
 
 @Entry
-@ComponentV2
+@Component
 export default struct Index {
   message: string = "乐动健康生活"
-  @Local person: Person = PersistenceV2.connect(Person, () => new Person)!
-  myphoney:string = this.person.phone.replace(this.person.phone.slice(3,7),'****')
+  @StorageLink('phone') phone: string = '19133339999'
+  myphone:string = this.phone.replace(this.phone.slice(3,7),'****')
 
   build() {
     Row() {
@@ -137,7 +136,7 @@ export default struct Index {
           .onClick(() => {
             let uiContext = this.getUIContext();
             let promptAction = uiContext.getPromptAction();
-            let contentNode = new ComponentContent(uiContext, wrapBuilder(buildText), new Params(this.message,this.myphoney));
+            let contentNode = new ComponentContent(uiContext, wrapBuilder(buildText), new Params(this.message,this.myphone));
             try {
               promptAction.openCustomDialog(contentNode);
             } catch (error) {
