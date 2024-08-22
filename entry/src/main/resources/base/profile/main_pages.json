@@ -18,6 +18,7 @@
     "pages/login/PerfectInfo",
     "pages/components/TextInputCodeView",
     "pages/login/HelpLogin",
-    "pages/view/Equipment/ScanBluetooth"
+    "pages/view/Equipment/ScanBluetooth",
+    "pages/view/Equipment/Sweep"
   ]
 }

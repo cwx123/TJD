@@ -67,9 +67,9 @@
         "reason": "$string:grant_use_bluetooth",
         "usedScene": {
           "abilities": [
-            "MainAbility"
+            "bluetouth"
           ],
-          "when": "inuse"
+          "when":"always"
         }
       },
       {
@@ -78,9 +78,9 @@
         "reason": "$string:grant_discovery_bluetooth",
         "usedScene": {
           "abilities": [
-            "MainAbility"
+            "FormAbility"
           ],
-          "when": "inuse"
+          "when":"always"
         }
       },
       {

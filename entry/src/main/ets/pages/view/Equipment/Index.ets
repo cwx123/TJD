@@ -41,7 +41,8 @@ export default struct Index {
     }),
     width:100,
     height:60,
-    offset: { dx: 150, dy: -10 },
+    offset: { dx: 150, dy: -310 },
+
   })
   onCancel() {
     this.dialogController.close()
