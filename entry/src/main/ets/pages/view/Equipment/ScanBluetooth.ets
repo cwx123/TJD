@@ -1,7 +1,6 @@
 import { router } from '@kit.ArkUI'
 import { abilityAccessCtrl, PermissionRequestResult } from '@kit.AbilityKit';
 import { BusinessError } from '@kit.BasicServicesKit';
-import connection from '@ohos.bluetooth.connection';
 import { access, ble } from '@kit.ConnectivityKit';
 //扫描蓝牙页面
 @Entry
@@ -14,6 +13,7 @@ struct ScanBluetooth {
   @State dataString:string = ''
   @State rotateAngle: number = 0//旋转角度
   @State scanboolean:boolean = true
+  @State deviceIdArr : Array<string> = [];
 
 
   requestPermissionsFromUser() {
@@ -35,12 +35,19 @@ struct ScanBluetooth {
 
     let onReceiveEvent = (data: Array<ble.ScanResult>) => {
       console.log('BLE scan device find result = ' + JSON.stringify(data));
-      this.Arrlist = JSON.parse(JSON.stringify(data));
-      // if (!this.Arrlist.includes(dataString)) {
-      //   this.Arrlist.push(dataString);
-      // }
-      console.log(this.Arrlist+'')
-      // this.onReceiveEventData = dataString
+      let oneDevice : ble.ScanResult = JSON.parse(JSON.stringify(data))[0];
+      console.log('BLE scan device find oneDevice = ' + JSON.stringify(oneDevice));
+
+      if (oneDevice && !this.deviceIdArr.includes(oneDevice.deviceId)) {
+        if (oneDevice.connectable && oneDevice.deviceName) {
+          console.log('BLE scan device add oneDevice = ' + JSON.stringify(oneDevice));
+          this.Arrlist.push(oneDevice);
+          this.deviceIdArr.push(oneDevice.deviceId);
+          console.log('BLE scan device add deviceIdArr = ' + JSON.stringify(this.deviceIdArr));
+        }
+      }
+
+      console.log('BLE scan device find Arrlist = ' + JSON.stringify(this.Arrlist));
     }
     try {
       ble.on("BLEDeviceFind", onReceiveEvent);
@@ -164,14 +171,14 @@ struct ScanBluetooth {
       Row(){
         Scroll() {
           List() {
-            ForEach(this.Arrlist, (item: string) => {
+            ForEach(this.Arrlist, (item: ble.ScanResult) => {
               ListItem() {
                 Row(){
                   Image($r('app.media.img_scan_device_square'))
                     .width(24).height(37)
                   Column(){
-                    Text('设备名称')
-                    Text(item)
+                    Text(item.deviceName)
+                    Text(item.deviceId)
                   }
                   .alignItems(HorizontalAlign.Start)
                   Button('连接')
